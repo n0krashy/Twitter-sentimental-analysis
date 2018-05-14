@@ -1,4 +1,17 @@
 from textblob import TextBlob
+# from ntlk import textblob
+import sys, tweepy
+import matplotlib.pyplot as plt
+from textblob import TextBlob
+# from ntlk import textblob
+import sys, tweepy
+import matplotlib.pyplot as plt
+from textblob import TextBlob
+# from ntlk import textblob
+import sys, tweepy
+import matplotlib.pyplot as plt
+from textblob import TextBlob
+# from ntlk import textblob
 import sys, tweepy
 import matplotlib.pyplot as plt
 
