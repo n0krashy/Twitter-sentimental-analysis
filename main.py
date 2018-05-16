@@ -1,5 +1,4 @@
-from textblob import TextBlob
-import sys, tweepy
+import tweepy
 import matplotlib.pyplot as plt
 from nltk.tokenize import TweetTokenizer
 from termcolor import colored
@@ -103,6 +102,7 @@ developers = '''
 print (colored(intro, 'blue'))
 
 print(colored(developers, 'green'))
+
 consumerKey = "UPkTpBcmwlmEbycSAsVpZckDK"
 consumerSecret = "9LpMalhBnQrBxyDB1sdXav2HzWW7L4lh2X134KbSrg77ppnmF6"
 accessToken = "633164510-zHpOWsTT5fAUNQyjlYvaR3CvvAMBV5LkSTXgJ54l"
@@ -120,15 +120,13 @@ negativeWords = negativesFile.read().splitlines()
 
 stopwordsFiles = open('stopwords.txt', 'r')
 stopwords = stopwordsFiles.read().splitlines()
-# print(positiveWords)
-# print(negativeWords)
+
 
 spacyParser = spacy.load('en')
 tweetTokenizer = TweetTokenizer()
 
 searchTerm = input("Enter keyword/hashtag to search about: ")
 noOfSearchTerms = int(input("Enter how many tweets to analyze: "))
-i = 1
 
 veryPositive =0
 positive = 0
@@ -144,25 +142,28 @@ tweets = tweepy.Cursor(api.search, q=searchTerm, count=100,
                            since="2017-04-03").items(noOfSearchTerms)
 for tweet in tweets:
 
+    print('-------------------------------------------')
+
+    print(tweet.text)
     tweetPolarity =0
     entities = list(spacyParser(tweet.text).ents)
-    print(entities)
+    # print(entities)
     tweetWords = removeEntities(tweet.text, entities)
-    print(tweetWords)
+    # print(tweetWords)
     tweetWords = tweetTokenizer.tokenize(tweetWords)
-    print(tweetWords)
+    # print(tweetWords)
     tweetWords = removeStopWords(tweetWords, stopwords)
-    print(tweetWords)
+    # print(tweetWords)
 
     tweetWords = removeStopWords(tweetWords, stopwordsNLTK.words('english'))
-    print(tweetWords)
+    # print(tweetWords)
 
     tweetWords = removeSearchTermAndTags(tweetWords, searchTerm)
-    print(tweetWords)
+    # print(tweetWords)
     tweetWords = removeURLS(tweetWords)
-    print(tweetWords)
+    # print(tweetWords)
     tweetWords = removeSingles(tweetWords)
-    print(tweetWords)
+    # print(tweetWords)
     tweetWords = getAdjectivesAndNouns(tweetWords)
     print(tweetWords)
     print('-------------------------------------------')
@@ -201,7 +202,7 @@ positive = format(positive, '.2f')
 neutral = format(neutral, '.2f')
 negative = format(negative, '.2f')
 veryNegative = format(veryNegative, '.2f')
-veryPositive = format(veryPositive, '2f')
+veryPositive = format(veryPositive, '.2f')
 
 print("How people are reacting on " + searchTerm + " by analyzing " + str(noOfSearchTerms) + " Tweets.")
 
