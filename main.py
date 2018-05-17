@@ -1,4 +1,6 @@
-import tweepy
+#!/usr/bin/env python
+
+import tweepy, sys, os
 import matplotlib.pyplot as plt
 from nltk.tokenize import TweetTokenizer
 from termcolor import colored
@@ -47,7 +49,6 @@ def getAdjectivesAndNouns(textlist):
     for text in textlist:
 
         try:
-
             type = wn.synsets(text)[0].pos()
             if type =='v' or type=='n':
                 continue
